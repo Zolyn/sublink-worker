@@ -120,6 +120,18 @@ export class SingboxConfigBuilder extends BaseConfigBuilder {
             delete sanitized.alpn;
         }
 
+        if (sanitized.type === "hysteria2") {
+            if (sanitized.up) {
+                sanitized["up_mbps"] = sanitized.up;
+                delete sanitized.up;
+            }
+
+            if (sanitized.down) {
+                sanitized["down_mbps"] = sanitized.down;
+                delete sanitized.down;
+            }
+        }
+
         // Remove packet_encoding for now - it's version-specific in sing-box
         // xudp is default in newer versions
         delete sanitized.packet_encoding;
