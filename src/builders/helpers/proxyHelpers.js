@@ -29,11 +29,6 @@ export function addProxyWithDedup(collection, proxy, { getName = defaultGetName,
         return targetName && name.includes(targetName);
     });
 
-    const hasIdentical = collection.some(item => isSame(item, candidate));
-    if (hasIdentical) {
-        return;
-    }
-
     if (similarProxies.length > 0 && typeof setName === 'function' && targetName) {
         const updated = setName(candidate, `${targetName} ${similarProxies.length + 1}`);
         if (typeof updated !== 'undefined') {
